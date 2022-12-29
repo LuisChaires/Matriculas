@@ -3,6 +3,7 @@ package org.matriculas.config;
 
 import org.matriculas.handler.CursoHandler;
 import org.matriculas.handler.EstudianteHandler;
+import org.matriculas.handler.MatriculaHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -34,5 +35,15 @@ public class RouterConfig {
                 .andRoute(POST("/v2/cursos"), handler::create)
                 .andRoute(PUT("/v2/cursos/{id}"), handler::update)
                 .andRoute(DELETE("/v2/cursos/{id}"), handler::delete);
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> routesMatriculas(MatriculaHandler handler){
+        return route(GET("/v2/matriculas"), handler::findAll)
+                .andRoute(GET("/v2/matriculas/{id}"), handler::findById)
+                .andRoute(GET("/v2/matriculas/order/{order}"), handler::findAllOrder)
+                .andRoute(POST("/v2/matriculas"), handler::create)
+                .andRoute(PUT("/v2/matriculas/{id}"), handler::update)
+                .andRoute(DELETE("/v2/matriculas/{id}"), handler::delete);
     }
 }

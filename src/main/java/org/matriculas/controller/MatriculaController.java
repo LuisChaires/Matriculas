@@ -1,6 +1,5 @@
 package org.matriculas.controller;
 
-import org.matriculas.model.Estudiante;
 import org.matriculas.model.Matricula;
 import org.matriculas.pagination.PageSupport;
 import org.matriculas.service.IMatriculaService;
@@ -16,9 +15,7 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 @RestController
 @RequestMapping("/matriculas")
@@ -36,7 +33,7 @@ public class MatriculaController {
     }
 
     @GetMapping("/order/{order}")
-    public Mono<ResponseEntity<Flux<Matricula>>> findByIdOrder(@PathVariable("order") String order) {
+    public Mono<ResponseEntity<Flux<Matricula>>> findAllOrder(@PathVariable("order") String order) {
         Flux<Matricula> fx = service.findAll();
 
         switch (order){
